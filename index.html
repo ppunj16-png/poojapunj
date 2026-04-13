@@ -1613,5 +1613,37 @@ var p=i.parentNode;if(p)p.insertBefore(b,i.nextSibling);});}
 if(document.readyState!=='loading')setTimeout(vi,700);
 else document.addEventListener('DOMContentLoaded',()=>setTimeout(vi,700));
 new MutationObserver(()=>setTimeout(vi,300)).observe(document.documentElement,{childList:true,subtree:true});
+})();</script><script id="vparc-cam-v4">(function(){
+var s=document.createElement('style');
+s.textContent='#vpcm{display:none;position:fixed;inset:0;background:rgba(0,0,0,.96);z-index:999999;flex-direction:column;align-items:center;justify-content:center;padding:20px}#vpcm.open{display:flex}#vpcm-v{width:100%;max-width:500px;border-radius:16px;border:3px solid #0ea5e9}#vpcm-h{color:#94a3b8;font-size:13px;margin-top:10px;font-family:sans-serif;text-align:center}.vr{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap;justify-content:center}.vb{padding:13px 26px;border-radius:50px;border:none;font-size:15px;cursor:pointer;font-weight:700}#vcp{background:#22c55e;color:#fff}#vfl,#vcl{background:rgba(255,255,255,.15);color:#fff}.vt{display:inline-flex;align-items:center;gap:5px;background:linear-gradient(135deg,#0ea5e9,#6366f1);color:#fff;border:none;border-radius:8px;padding:8px 14px;font-size:13px;cursor:pointer;margin-left:8px;font-weight:700;vertical-align:middle}';
+document.head.appendChild(s);
+var m=document.createElement('div');m.id='vpcm';
+m.innerHTML='<div style="color:#fff;font-size:17px;font-weight:700;margin-bottom:12px;font-family:sans-serif">📷 VPARC Camera</div><video id="vpcm-v" autoplay playsinline muted></video><canvas id="vpcm-c" style="display:none"></canvas><div id="vpcm-h">Tap Capture</div><div class="vr"><button class="vb" id="vcp">📸 Capture</button><button class="vb" id="vfl">🔄 Flip</button><button class="vb" id="vcl">✕ Cancel</button></div>';
+document.body.appendChild(m);
+var st=null,ip=null,fm='environment';
+async function vs(f){if(st)st.getTracks().forEach(t=>t.stop());
+try{st=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:f},width:{ideal:1280},height:{ideal:960}}});
+document.getElementById('vpcm-v').srcObject=st;
+document.getElementById('vpcm-h').textContent=(f==='environment'?'Rear':'Front')+' camera';}
+catch(e){document.getElementById('vpcm-h').textContent='Camera error: '+e.message;}}
+function vc(){if(st){st.getTracks().forEach(t=>t.stop());st=null;}document.getElementById('vpcm').classList.remove('open');ip=null;}
+function vo(i){ip=i;fm='environment';document.getElementById('vpcm').classList.add('open');vs(fm);}
+document.getElementById('vcp').addEventListener('click',()=>{
+var v=document.getElementById('vpcm-v'),c=document.getElementById('vpcm-c');
+c.width=v.videoWidth||640;c.height=v.videoHeight||480;
+c.getContext('2d').drawImage(v,0,0);
+c.toBlob(b=>{if(ip&&b){var f=new File([b],'vparc_'+Date.now()+'.jpg',{type:'image/jpeg'});var dt=new DataTransfer();dt.items.add(f);try{ip.files=dt.files;ip.dispatchEvent(new Event('change',{bubbles:true}));ip.dispatchEvent(new Event('input',{bubbles:true}));}catch(ex){}}vc();},'image/jpeg',0.92);});
+document.getElementById('vfl').addEventListener('click',()=>{fm=fm==='environment'?'user':'environment';vs(fm);});
+document.getElementById('vcl').addEventListener('click',vc);
+document.getElementById('vpcm').addEventListener('click',e=>{if(e.target===m)vc();});
+function vi(){document.querySelectorAll('input[type=file]').forEach(i=>{
+if(i.dataset.vpi)return;i.dataset.vpi='1';
+if(!i.hasAttribute('capture'))i.setAttribute('capture','environment');
+var b=document.createElement('button');b.type='button';b.className='vt';b.innerHTML='📷 Camera';
+b.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();vo(i);});
+var p=i.parentNode;if(p)p.insertBefore(b,i.nextSibling);});}
+if(document.readyState!=='loading')setTimeout(vi,700);
+else document.addEventListener('DOMContentLoaded',()=>setTimeout(vi,700));
+new MutationObserver(()=>setTimeout(vi,300)).observe(document.documentElement,{childList:true,subtree:true});
 })();</script></body>
 </html>
